@@ -10,7 +10,7 @@ CREATE TABLE `coupon`.`coupons` (
     , `date_issue_end`       datetime(6)    NOT NULL COMMENT '발급 종료 일시'
     , `date_created`         datetime(6)    NOT NULL COMMENT '생성 일시'
     , `date_updated`         datetime(6)    NOT NULL COMMENT '수정 일시'
-    PRIMARY KEY (`id`)
+    , PRIMARY KEY (`id`)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COMMENT '쿠폰 정책';
 
 CREATE TABLE `coupon`.`coupon_issues` (

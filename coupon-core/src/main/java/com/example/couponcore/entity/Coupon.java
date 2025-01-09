@@ -40,10 +40,10 @@ public class Coupon extends BaseTimeEntity {
     private int minAvailableAmount;
 
     @Column(nullable = false)
-    private LocalDateTime dateIssuedStart;
+    private LocalDateTime dateIssueStart;
 
     @Column(nullable = false)
-    private LocalDateTime dateIssuedEnd;
+    private LocalDateTime dateIssueEnd;
 
     //수량 검증
     public boolean availableIssueQuantity() {
@@ -57,7 +57,7 @@ public class Coupon extends BaseTimeEntity {
     //발급 기한 검증
     public boolean availableIssueDate() {
         LocalDateTime now = LocalDateTime.now();
-        return this.dateIssuedStart.isBefore(now) && this.dateIssuedEnd.isAfter(now);
+        return this.dateIssueStart.isBefore(now) && this.dateIssueEnd.isAfter(now);
     }
 
     public void issue() {
@@ -66,7 +66,7 @@ public class Coupon extends BaseTimeEntity {
         }
 
         if(!this.availableIssueDate()) {
-            throw new CouponIssueException(ErrorCode.INVALID_COUPON_ISSUE_DATE, "발급 가능한 일자가 아닙니다. 요청 일자 : %s, 발급 시작 : %s, 발급 종료 : %s".formatted(LocalDateTime.now(), dateIssuedStart, dateIssuedEnd));
+            throw new CouponIssueException(ErrorCode.INVALID_COUPON_ISSUE_DATE, "발급 가능한 일자가 아닙니다. 요청 일자 : %s, 발급 시작 : %s, 발급 종료 : %s".formatted(LocalDateTime.now(), dateIssueStart, dateIssueEnd));
         }
 
         this.issuedQuantity++;
